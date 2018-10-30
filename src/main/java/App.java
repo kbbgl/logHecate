@@ -16,7 +16,7 @@ public class App {
             String path = args[3];
 
             try {
-                IISDirectoryWatcher watcher = new IISDirectoryWatcher(path);
+                new FileWatcher(path, pattern);
             } catch (IOException e) {
                 e.printStackTrace();
             }

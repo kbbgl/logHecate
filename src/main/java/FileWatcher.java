@@ -2,19 +2,23 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.*;
 import java.util.stream.Stream;
 
 import static com.sun.jmx.mbeanserver.Util.cast;
 
-class IISDirectoryWatcher {
+class FileWatcher {
 
     private Path path;
+    private String pattern;
     private WatchService watchService;
     private WatchKey key;
 
-    IISDirectoryWatcher(String path) throws IOException {
+    FileWatcher(String path, String pattern) throws IOException {
         this.path = Paths.get(path);
+        this.pattern = pattern;
         this.watchService = FileSystems.getDefault().newWatchService();
         printListFilesInDir();
         register();
@@ -67,10 +71,13 @@ class IISDirectoryWatcher {
                     WatchEvent<Path> ev = cast(event);
                     handleEvent(ev);
 
-
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.err.println("Error retrieving and removing next watch key:");
+                System.err.println("Message: " + e.getMessage());
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                System.err.println("Stacktrace: " + sw.toString());
             }
         }
     }
@@ -81,20 +88,17 @@ class IISDirectoryWatcher {
         Path absPath = Paths.get(this.path.toString(), filename.toString());
         String extension = FilenameUtils.getExtension(filename.getFileName().toString());
 
-        if (extension.equals("txt")){
-            System.out.format("%s: %s\n", event.kind().name(), filename);
-            readFileContent(absPath);
-        }
-
-
         if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE){
-            System.out.printf("File created %s\n", event.context());
+            System.out.printf("File created %s\n", filename);
         }
         else if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE){
-            System.out.printf("File deleted %s\n", event.context());
+            System.out.printf("File deleted %s\n",filename);
         }
         else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY){
-            System.out.printf("File modified %s\n", event.context());
+            System.out.printf("File modified %s\n", filename);
+            if (extension.equals("txt")){
+                readFileContent(absPath);
+            }
         }
 
         key.reset();
@@ -104,12 +108,16 @@ class IISDirectoryWatcher {
         File file = path.toFile();
         System.out.println("Reading file " + file);
 
-        try(Stream<String > stream = Files.lines(Paths.get(file.getAbsolutePath()))){
+        try(Stream<String > stream = Files.lines(Paths.get(file.getAbsolutePath())).filter(line -> line.contains(this.pattern))){
 
             stream.forEach(System.out::println);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error reading file:");
+            System.err.println("Message: " + e.getMessage());
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            System.err.println("Stacktrace: " + sw.toString());
         }
     }
 }
