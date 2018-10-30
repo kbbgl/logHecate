@@ -15,8 +15,7 @@ repositories {
 }
 
 jar{
-    baseName = "logWatcher"
-    version = "1.0.0"
+    baseName = "logHecate"
     manifest {
         attributes(
                 'Main-Class': 'App'
