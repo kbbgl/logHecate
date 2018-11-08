@@ -36,8 +36,37 @@ dependencies {
 
 }
 
+def logPath(){
+
+    boolean isWindows
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        isWindows = true
+    } else {
+        isWindows = false
+    }
+
+    String path
+    if (isWindows){
+        path = "C:\\temp\\test.txt"
+    }
+    else {
+        path = "/Users/kobbigal/dev/dir_for_testing/text1.txt"
+    }
+
+    return path
+}
+
+def printOS() {
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        println "OS detected: Windows"
+    } else {
+        println "OS detected: UNIX"
+    }
+}
 
 task writeToLogFile(){
+
+    printOS()
 
     doLast {
         int numberOfBatches = 10
@@ -47,19 +76,17 @@ task writeToLogFile(){
         for (int i = 1; i <=numberOfBatches; i++) {
 
             for (int j = 1; j <= numberOfLinesToWrite; j++) {
-
                 // Write to file
-                new File("/Users/kobbigal/dev/dir_for_testing/text1.txt").append(i*j + " " + System.nanoTime() + " [" + new Date().toTimestamp().toString() + "] [DEBUG] [" + new Random().with {(1..9).collect {(('a'..'z')).join()[ nextInt((('a'..'z')).join().length())]}.join()} + "]\n")
+                new File(logPath()).append(System.nanoTime() + " [" + new Date().toTimestamp().toString() + "] [DEBUG] [" + new Random().with {(1..9).collect {(('a'..'z')).join()[ nextInt((('a'..'z')).join().length())]}.join()} + "]\n")
             }
             println("batch " + i + " done. Sleeping for " + secondsToSleep + " seconds")
             sleep(secondsToSleep * 1000)
         }
-
     }
 }
 
 task deleteFileContent(){
-    new File("/Users/kobbigal/dev/dir_for_testing/text1.txt").text = ''''''
+    new File(logPath()).text = ''''''
 }
 
 
