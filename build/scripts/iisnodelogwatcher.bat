@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\logWatcher-1.0.0.jar;%APP_HOME%\lib\commons-io-2.6.jar
+set CLASSPATH=%APP_HOME%\lib\logHecate.jar;%APP_HOME%\lib\commons-io-2.6.jar
 
 @rem Execute iisnodelogwatcher
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %IISNODELOGWATCHER_OPTS%  -classpath "%CLASSPATH%" App %CMD_LINE_ARGS%

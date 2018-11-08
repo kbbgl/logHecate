@@ -6,12 +6,14 @@
  * user guide available at https://docs.gradle.org/3.3/userguide/tutorial_java_projects.html
  */
 
-apply plugin: 'java'
 
+
+apply plugin: 'java'
 apply plugin: 'application'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 jar{
@@ -32,8 +34,32 @@ dependencies {
     // https://mvnrepository.com/artifact/commons-io/commons-io
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
-    // Use JUnit test framework
-    testCompile 'junit:junit:4.12'
+}
+
+
+task writeToLogFile(){
+
+    doLast {
+        int numberOfBatches = 10
+        int numberOfLinesToWrite = 50
+        int secondsToSleep = 5
+
+        for (int i = 1; i <=numberOfBatches; i++) {
+
+            for (int j = 1; j <= numberOfLinesToWrite; j++) {
+
+                // Write to file
+                new File("/Users/kobbigal/dev/dir_for_testing/text1.txt").append(i*j + " " + System.nanoTime() + " [" + new Date().toTimestamp().toString() + "] [DEBUG] [" + new Random().with {(1..9).collect {(('a'..'z')).join()[ nextInt((('a'..'z')).join().length())]}.join()} + "]\n")
+            }
+            println("batch " + i + " done. Sleeping for " + secondsToSleep + " seconds")
+            sleep(secondsToSleep * 1000)
+        }
+
+    }
+}
+
+task deleteFileContent(){
+    new File("/Users/kobbigal/dev/dir_for_testing/text1.txt").text = ''''''
 }
 
 

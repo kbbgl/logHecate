@@ -30,7 +30,7 @@ public class App {
 
         System.err.println("ERROR: Incorrect usage");
         System.out.println("Usage:");
-        System.out.println("\tjava -jar logWatcher-[VERSION].jar -p \"PATTERN_TO_MATCH\" -d \"path/to/file\"");
+        System.out.println("\tjava -jar logHecate.jar -p \"PATTERN_TO_MATCH\" -d \"path/to/file\"");
 
     }
 
