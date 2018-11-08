@@ -3,7 +3,7 @@
 
 To run:
 
-1) Change into `[PATH_TO_CLONED_DIR]/iisDirectoryWatcher/build/libs`.
+1) Change into `[PATH_TO_CLONED_DIR]/logHecate/build/libs`.
 2) Run the following command:
 
 <code>java -jar logHecate.java -p "PATTERN" -d "path/to/dir""</code>
