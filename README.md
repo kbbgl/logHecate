@@ -1,4 +1,4 @@
-#LogHecate
+# LogHecate
 ####  Create filtered log files by reading other static and live-written logs
 
 To run:
