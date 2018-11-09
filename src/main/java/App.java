@@ -9,29 +9,35 @@ public class App {
 
         // TODO add file extension as an option, i.e. -e "txt"
 
-        if (args.length == 4){
+        if (args.length >0 && (args[0].equals("help") || args[0].equals("--help") || args[0].equals("--h") || args[0].equals("-h") )) {
+            printHelp();
+        }
+
+        else if (args.length == 4){
 
             printInput(args);
             String pattern = args[1];
-            String path = args[3];
+            String pathToWatch = args[3];
 
             try {
-                new FileWatcher(path, pattern);
+                new FileWatcher(pathToWatch, pattern);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         else {
+            System.err.println("ERROR: Incorrect usage");
             printHelp();
         }
     }
 
     private static void printHelp(){
-
-        System.err.println("ERROR: Incorrect usage");
-        System.out.println("Usage:");
+        System.out.println("\nUSAGE:");
         System.out.println("\tjava -jar logHecate.jar -p \"PATTERN_TO_MATCH\" -d \"path/to/file\"");
-
+        System.out.println("\nUNIX example:\n" +
+                "\tjava -jar logHecate.java -p \"err\" -d \"/Users/admin/some/software/logs\"\n" +
+                "Windows example:  \n" +
+                "\tjava -jar logHecate.java -p \"err\" -d \"C://some//software//logs\"");
     }
 
     private static void printInput(String[] parameters){
