@@ -6,7 +6,7 @@ To run:
 1) `cd [PATH_TO_CLONED_DIR]/logHecate/build/libs`.
 2) Run the following command:
 
-<code>java -jar logHecate.java -p PATTERN -wd path/to/dir</code>
+<code>java -jar logHecate.jar -p PATTERN -wd path/to/dir</code>
 
 i.e. to fetch logs that might contain errors
  
