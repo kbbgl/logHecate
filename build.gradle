@@ -10,6 +10,7 @@
 
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'idea'
 
 repositories {
     jcenter()
@@ -34,9 +35,14 @@ dependencies {
     // https://mvnrepository.com/artifact/commons-io/commons-io
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
+    // https://mvnrepository.com/artifact/com.beust/jcommander
+//    compile group: 'com.beust', name: 'jcommander', version: '1.72'
+
+    compile 'com.beust:jcommander:1.72'
+
 }
 
-def logPath(){
+static def logPath(){
 
     boolean isWindows
     if (System.properties['os.name'].toLowerCase().contains('windows')) {

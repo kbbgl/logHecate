@@ -1,3 +1,6 @@
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.ParameterException;
+
 import java.io.IOException;
 
 /*
@@ -5,43 +8,48 @@ import java.io.IOException;
  */
 public class App {
 
+    private final MainCLParameters mainArgs = new MainCLParameters();
+    private final String appName = "logHecate";
+
     public static void main(String[] args) {
 
         // TODO add file extension as an option, i.e. -e "txt"
 
-        if (args.length >0 && (args[0].equals("help") || args[0].equals("--help") || args[0].equals("--h") || args[0].equals("-h") )) {
-            printHelp();
-        }
+        App app = new App();
+        app.handleInputArgs(args);
+        app.run();
+    }
 
-        else if (args.length == 4){
+    private void run() {
+        System.out.printf("\nRunning %s with arguments:\n", appName);
+        System.out.println(mainArgs);
 
-            printInput(args);
-            String pattern = args[1];
-            String pathToWatch = args[3];
-
-            try {
-                new FileWatcher(pathToWatch, pattern);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            System.err.println("ERROR: Incorrect usage");
-            printHelp();
+        try {
+            new FileWatcher(mainArgs.watchDir, mainArgs.pattern);
+        } catch (IOException e) {
+            System.err.printf("Error running: %s", e.getMessage());
         }
     }
 
-    private static void printHelp(){
-        System.out.println("\nUSAGE:");
-        System.out.println("\tjava -jar logHecate.jar -p \"PATTERN_TO_MATCH\" -d \"path/to/file\"");
-        System.out.println("\nUNIX example:\n" +
-                "\tjava -jar logHecate.java -p \"err\" -d \"/Users/admin/some/software/logs\"\n" +
-                "Windows example:  \n" +
-                "\tjava -jar logHecate.java -p \"err\" -d \"C://some//software//logs\"");
+    private void handleInputArgs(String[] args) {
+        JCommander jCommander = new JCommander(mainArgs);
+        jCommander.setProgramName(appName);
+
+        try {
+            jCommander.parse(args);
+        }
+        catch (ParameterException pe){
+            System.err.println(pe.getMessage());
+            showUsage(jCommander);
+        }
+
+        if (mainArgs.isHelp()){
+            showUsage(jCommander);
+        }
     }
 
-    private static void printInput(String[] parameters){
-        System.out.printf("Pattern to search for: '%s'\n", parameters[1]);
-        System.out.printf("Watching directory: %s\n", parameters[3]);
+    private void showUsage(JCommander jCommander) {
+        jCommander.usage();
+        System.exit(0);
     }
 }

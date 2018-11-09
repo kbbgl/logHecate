@@ -16,8 +16,8 @@ class FileWatcher {
     private WatchService watchService;
     private WatchKey key;
 
-    FileWatcher(String path, String pattern) throws IOException {
-        this.path = Paths.get(path);
+    FileWatcher(Path path, String pattern) throws IOException {
+        this.path = path;
         this.pattern = pattern;
         this.watchService = FileSystems.getDefault().newWatchService();
         printListFilesInDir();
