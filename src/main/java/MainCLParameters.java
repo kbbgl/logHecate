@@ -6,7 +6,10 @@ import validators.DirectoryParameterValidator;
 import validators.FileParameterValidator;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Parameters(separators = "=")
 class MainCLParameters {
@@ -25,7 +28,7 @@ class MainCLParameters {
             validateWith = DirectoryParameterValidator.class,
             converter = PathConverter.class
     )
-    public Path watchDir;
+    Path watchDir;
     // public List<Path> paths = new ArrayList<>();
 
     @Parameter(
@@ -33,20 +36,37 @@ class MainCLParameters {
             required = true,
             description = "Pattern to search for"
     )
-    public String pattern;
+    String pattern;
+
+
 
     @Parameter(
             names = {"-od", "--od", "--outputdir", "-outputdir"},
 //            required = false,
-            description = "Absolute path to the created log. Default is path where app is run.",
+            description = "Absolute path to the created log. Default path where app is run.",
             validateWith = FileParameterValidator.class,
             converter = FileConverter.class
     )
-    public File outputDir;
-
+    File outputDir;
 
     boolean isHelp() {
         return help;
+    }
+
+    void setOutputDir() throws URISyntaxException, IOException {
+        String jarLocation;
+        jarLocation = new File(App.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getCanonicalPath();
+        Path path = Paths.get(Paths.get(jarLocation).getParent() + "/run/result.log");
+        File outputFile;
+
+        if (!path.toFile().exists()){
+            outputFile = path.toFile();
+            outputFile.createNewFile();
+            this.outputDir = outputFile;
+
+        }
+
+        System.out.println("outputDir: " + this.outputDir.getAbsolutePath());
     }
 
     @Override

@@ -13,12 +13,23 @@ class FileWatcher {
 
     private Path path;
     private String pattern;
+    private File outputLog;
     private WatchService watchService;
     private WatchKey key;
 
-    FileWatcher(Path path, String pattern) throws IOException {
+    FileWatcher(Path path, String pattern) throws IOException{
         this.path = path;
         this.pattern = pattern;
+        this.watchService = FileSystems.getDefault().newWatchService();
+        printListFilesInDir();
+        register();
+        processEvents();
+    }
+
+    FileWatcher(Path watchDir, String pattern, File outputDir) throws IOException {
+        this.path = watchDir;
+        this.pattern = pattern;
+        this.outputLog = outputDir;
         this.watchService = FileSystems.getDefault().newWatchService();
         printListFilesInDir();
         register();
@@ -108,9 +119,10 @@ class FileWatcher {
         File file = path.toFile();
         System.out.println("Reading file " + file);
 
-        try(Stream<String > stream = Files.lines(Paths.get(file.getAbsolutePath())).filter(line -> line.contains(this.pattern))){
+        try(Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath())).filter(line -> line.contains(this.pattern))){
 
             stream.forEach(System.out::println);
+            writeToOutputFile(stream);
 
         } catch (IOException e) {
             System.err.println("Error reading file:");
@@ -119,5 +131,13 @@ class FileWatcher {
             e.printStackTrace(new PrintWriter(sw));
             System.err.println("Stacktrace: " + sw.toString());
         }
+    }
+
+    private void writeToOutputFile(Stream<String> lines) throws IOException {
+        PrintWriter output;
+        System.out.println("writeToOutputFile: " + this.outputLog.getAbsolutePath());
+        output = new PrintWriter(this.outputLog.getAbsolutePath(), "UTF-8");
+        lines.forEachOrdered(output::println);
+
     }
 }
