@@ -36,9 +36,10 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
     // https://mvnrepository.com/artifact/com.beust/jcommander
-//    compile group: 'com.beust', name: 'jcommander', version: '1.72'
-
     compile 'com.beust:jcommander:1.72'
+
+    // https://mvnrepository.com/artifact/com.massisframework/j-text-utils
+//    compile 'com.massisframework:j-text-utils:0.3.4'
 
 }
 

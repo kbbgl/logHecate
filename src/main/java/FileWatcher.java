@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.file.*;
+import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
 
 import static com.sun.jmx.mbeanserver.Util.cast;
@@ -14,6 +15,9 @@ class FileWatcher {
     private Path path;
     private String pattern;
     private File outputLog;
+
+    // TODO add file types to look for
+    // private String[] fileTypes;
     private WatchService watchService;
     private WatchKey key;
 
@@ -38,18 +42,24 @@ class FileWatcher {
 
     private void printListFilesInDir() {
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         File[] files = this.path.toFile().listFiles();
 
         if (files != null && files.length > 0) {
 
-            System.out.println("Files in " + this.path + ":");
+            System.out.println("Files in " + this.path + ":\n");
 
             for (File file : files) {
 
-                if (file.isFile()){
-                    System.out.println("\t" + file.getName());
+                // TODO change logic based on fileTypes property.
+                if (file.isFile()
+                        && (FilenameUtils.getExtension(file.getName()).equals("txt")
+                        || FilenameUtils.getExtension(file.getName()).equals("log"))){
+                    System.out.printf("%s\t%-10s%s%n", file.getName(), file.length(), simpleDateFormat.format(file.lastModified()));
+//                    System.out.println("\t" + file.getName() + "\t" + file.length() + " bytes" + "\t" + simpleDateFormat.format(file.lastModified()));
                 }
             }
+            System.out.println();
         }
         else {
             System.out.printf("No files found in %s\n", this.path);
@@ -122,7 +132,7 @@ class FileWatcher {
         try(Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath())).filter(line -> line.contains(this.pattern))){
 
             stream.forEach(System.out::println);
-            writeToOutputFile(stream);
+//            writeToOutputFile(stream);
 
         } catch (IOException e) {
             System.err.println("Error reading file:");
@@ -133,11 +143,11 @@ class FileWatcher {
         }
     }
 
-    private void writeToOutputFile(Stream<String> lines) throws IOException {
-        PrintWriter output;
-        System.out.println("writeToOutputFile: " + this.outputLog.getAbsolutePath());
-        output = new PrintWriter(this.outputLog.getAbsolutePath(), "UTF-8");
-        lines.forEachOrdered(output::println);
-
-    }
+//    private void writeToOutputFile(Stream<String> lines) throws IOException {
+//        PrintWriter output;
+//        System.out.println("writeToOutputFile: " + this.outputLog.getAbsolutePath());
+//        output = new PrintWriter(this.outputLog.getAbsolutePath(), "UTF-8");
+//        lines.forEachOrdered(output::println);
+//
+//    }
 }

@@ -53,22 +53,6 @@ class MainCLParameters {
         return help;
     }
 
-    void setOutputDir() throws URISyntaxException, IOException {
-        String jarLocation;
-        jarLocation = new File(App.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getCanonicalPath();
-        Path path = Paths.get(Paths.get(jarLocation).getParent() + "/run/result.log");
-        File outputFile;
-
-        if (!path.toFile().exists()){
-            outputFile = path.toFile();
-            outputFile.createNewFile();
-            this.outputDir = outputFile;
-
-        }
-
-        System.out.println("outputDir: " + this.outputDir.getAbsolutePath());
-    }
-
     @Override
     public String toString() {
         return "\n\twatchDir=" + watchDir +
