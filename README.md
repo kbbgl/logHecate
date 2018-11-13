@@ -34,7 +34,16 @@
 To fetch logs that might contain errors
  
  UNIX:   
- <code>java -jar logHecate.jar -p error -wd /Users/admin/some/software/logs</code>
+ <code>java -jar logHecate.jar -p error -wd /Users/admin/some/software/logs   
+ -of /Users/admin/temp/output.log</code>
  
  Windows:  
- <code>java -jar logHecate.jar -p error -wd C://some//software//logs</code>
+ <code>java -jar logHecate.jar -p error -wd C://some//software//logs -of C://temp//output_log.log</code>
+ 
+ 
+##### Limitations:
+ 
+ * If you choose to specify a file path using the `-of` flag, make sure that the file has already been created.
+ This limitation will be addressed in next versions.
+ 
+ * Currently supports reading `.txt` and `.log` files in directory.
