@@ -1,6 +1,8 @@
 # LogHecate
 #####  Create filtered log files
 
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/shields.svg?style=flat-square)](https://github.com/kbbgl/logHecate)
+
 #### To run:
 
 1) `cd [PATH_TO_CLONED_DIR]/logHecate/build/libs`.
