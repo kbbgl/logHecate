@@ -1,9 +1,6 @@
 import org.apache.commons.io.FilenameUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.file.*;
 import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
@@ -21,19 +18,19 @@ class FileWatcher {
     private WatchService watchService;
     private WatchKey key;
 
-    FileWatcher(Path path, String pattern) throws IOException{
-        this.path = path;
-        this.pattern = pattern;
-        this.watchService = FileSystems.getDefault().newWatchService();
-        printListFilesInDir();
-        register();
-        processEvents();
-    }
+//    FileWatcher(Path path, String pattern) throws IOException{
+//        this.path = path;
+//        this.pattern = pattern;
+//        this.watchService = FileSystems.getDefault().newWatchService();
+//        printListFilesInDir();
+//        register();
+//        processEvents();
+//    }
 
-    FileWatcher(Path watchDir, String pattern, File outputDir) throws IOException {
+    FileWatcher(Path watchDir, String pattern, File outputLog) throws IOException {
         this.path = watchDir;
         this.pattern = pattern;
-        this.outputLog = outputDir;
+        this.outputLog = outputLog;
         this.watchService = FileSystems.getDefault().newWatchService();
         printListFilesInDir();
         register();
@@ -103,7 +100,7 @@ class FileWatcher {
         }
     }
 
-    private void handleEvent(WatchEvent<Path> event){
+    private void handleEvent(WatchEvent<Path> event) {
 
         Path filename = event.context();
         Path absPath = Paths.get(this.path.toString(), filename.toString());
@@ -118,36 +115,35 @@ class FileWatcher {
         else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY){
             System.out.printf("File modified %s\n", filename);
             if (extension.equals("txt")){
-                readFileContent(absPath);
+                try {
+                    readFileContent(absPath);
+                } catch (IOException e) {
+                    System.err.println("ERROR: reading file content: " + e.getMessage());
+                }
             }
         }
 
         key.reset();
     }
 
-    private void readFileContent(Path path){
+    private void readFileContent(Path path) throws IOException{
         File file = path.toFile();
+        final FileWriter fileWriter = new FileWriter(outputLog);
         System.out.println("Reading file " + file);
 
-        try(Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath())).filter(line -> line.contains(this.pattern))){
+        Files.lines(Paths.get(file.getAbsolutePath()))
+                .filter(line -> line.contains(this.pattern))
+                .forEach(line -> writeToFile(fileWriter, line));
 
-            stream.forEach(System.out::println);
-//            writeToOutputFile(stream);
-
-        } catch (IOException e) {
-            System.err.println("Error reading file:");
-            System.err.println("Message: " + e.getMessage());
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            System.err.println("Stacktrace: " + sw.toString());
-        }
+        fileWriter.close();
     }
 
-//    private void writeToOutputFile(Stream<String> lines) throws IOException {
-//        PrintWriter output;
-//        System.out.println("writeToOutputFile: " + this.outputLog.getAbsolutePath());
-//        output = new PrintWriter(this.outputLog.getAbsolutePath(), "UTF-8");
-//        lines.forEachOrdered(output::println);
-//
-//    }
+    private void writeToFile(FileWriter fw, String line) {
+        try {
+            fw.write(String.format("%s%n", line));
+            System.out.printf("Wrote line %s to file%n", line);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

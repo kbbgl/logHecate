@@ -38,26 +38,28 @@ class MainCLParameters {
     )
     String pattern;
 
-
-
     @Parameter(
-            names = {"-od", "--od", "--outputdir", "-outputdir"},
+            names = {"-of", "--of", "--outputfile", "-outputfile"},
 //            required = false,
             description = "Absolute path to the created log. Default path where app is run.",
             validateWith = FileParameterValidator.class,
             converter = FileConverter.class
     )
-    File outputDir;
+    File outputFile;
 
     boolean isHelp() {
         return help;
+    }
+
+    String getOutputFilePath(){
+        return this.outputFile.getPath();
     }
 
     @Override
     public String toString() {
         return "\n\twatchDir=" + watchDir +
                 "\n\tpattern=" + pattern +
-                "\n\toutputDir=" + outputDir +
+                "\n\toutputDir=" + outputFile +
                 "\n";
     }
 }

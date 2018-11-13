@@ -9,10 +9,6 @@
     <orderEntry type="module" module-name="iisnodelogwatcher_main" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
-    <orderEntry type="library" name="Gradle: com.massisframework:j-text-utils:0.3.4" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.guava:guava:21.0" level="project" />
-    <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
-    <orderEntry type="library" name="Gradle: au.com.bytecode:opencsv:2.4" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="iisnodelogwatcher_main" />
 </module>
