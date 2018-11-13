@@ -1,7 +1,7 @@
 # LogHecate
 #####  Create filtered log files
 
-[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/shields.svg?style=flat-square)](https://github.com/kbbgl/logHecate)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/badges/shields.svg?style=popout)](https://github.com/kbbgl/logHecate)
 
 #### To run:
 
