@@ -128,7 +128,7 @@ class FileWatcher {
 
     private void readFileContent(Path path) throws IOException{
         File file = path.toFile();
-        final FileWriter fileWriter = new FileWriter(outputLog);
+        final FileWriter fileWriter = new FileWriter(outputLog, true);
         System.out.println("Reading file " + file);
 
         Files.lines(Paths.get(file.getAbsolutePath()))
