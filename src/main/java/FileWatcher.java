@@ -119,20 +119,20 @@ class FileWatcher {
 
     private void readFileContent(Path path) throws IOException{
         File file = path.toFile();
-        final FileWriter fileWriter = new FileWriter(this.outputLog, true);
+//        final FileWriter fileWriter = new FileWriter(this.outputLog, true);
         System.out.println("Reading file " + file);
 
-        Files.lines(Paths.get(file.getAbsolutePath()))
-                .filter(line -> line.contains(this.pattern))
-                .forEach(line -> writeToFile(fileWriter, line));
-
+        try (FileWriter fileWriter = new FileWriter(this.outputLog, true)){
+            Files.lines(Paths.get(file.getAbsolutePath()))
+                    .filter(line -> line.contains(this.pattern))
+                    .forEach(line -> writeToFile(fileWriter, line));
+        }
     }
 
     private void writeToFile(FileWriter fw, String line) {
         try {
             fw.write(String.format("%s%n", line));
             System.out.printf("Wrote line %s to file%n", line);
-//            fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
