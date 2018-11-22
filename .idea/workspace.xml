@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c28d1308-03da-4858-9107-e84d7af04b1e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/result_1542142413751.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileWatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FileWatcher.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -94,10 +96,12 @@
     <session id="-471509259">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.22" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -107,13 +111,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="231" />
+          <entry key="JAVA" value="345" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="231" />
+          <entry key="java" value="345" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -165,12 +169,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
+                <state relative-caret-position="731">
+                  <caret line="91" column="58" lean-forward="true" selection-start-line="91" selection-start-column="58" selection-end-line="91" selection-end-column="58" />
                   <folding>
                     <element signature="e#512#554#0" />
                     <element signature="method#main#0;class#App#0" />
-                    <element signature="method#run#0;class#App#0" />
                     <element signature="method#handleInputArgs#0;class#App#0" />
                     <element signature="method#showUsage#0;class#App#0" />
                     <element signature="method#appRunTime#0;class#App#0" />
@@ -207,7 +210,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/build.gradle">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
+                <state relative-caret-position="204">
                   <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
@@ -223,8 +226,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/FileWatcher.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="564">
-                  <caret line="130" column="70" lean-forward="true" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
+                <state relative-caret-position="225">
+                  <caret line="111" column="80" lean-forward="true" selection-start-line="111" selection-start-column="80" selection-end-line="111" selection-end-column="80" />
                 </state>
               </provider>
             </entry>
@@ -250,6 +253,7 @@
       <find>get</find>
       <find>FileWatcher</find>
       <find>writeToFile</find>
+      <find>runtime</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -655,15 +659,15 @@
         <option value="$PROJECT_DIR$/src/main/java/validators/DirectoryParameterValidator.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/MainCLParameters.java" />
-        <option value="$PROJECT_DIR$/src/main/java/App.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/FileWatcher.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1095" />
-    <option name="y" value="23" />
+    <option name="x" value="-46" />
+    <option name="y" value="-8" />
     <option name="width" value="1440" />
     <option name="height" value="1317" />
   </component>
@@ -802,7 +806,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49944875" weight="0.23197782" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49944875" visible="true" weight="0.23197782" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5005513" side_tool="true" weight="0.32994455" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" />
@@ -873,18 +877,10 @@
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/util/stream/Stream.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/FileWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="74" column="18" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
-          <folding>
-            <element signature="e#512#554#0" />
-            <element signature="method#main#0;class#App#0" />
-            <element signature="method#run#0;class#App#0" />
-            <element signature="method#handleInputArgs#0;class#App#0" />
-            <element signature="method#showUsage#0;class#App#0" />
-            <element signature="method#appRunTime#0;class#App#0" />
-          </folding>
+        <state relative-caret-position="344">
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -911,7 +907,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="204">
           <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -919,17 +915,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/io/FileWriter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        <state relative-caret-position="731">
+          <caret line="91" column="58" lean-forward="true" selection-start-line="91" selection-start-column="58" selection-end-line="91" selection-end-column="58" />
+          <folding>
+            <element signature="e#512#554#0" />
+            <element signature="method#main#0;class#App#0" />
+            <element signature="method#handleInputArgs#0;class#App#0" />
+            <element signature="method#showUsage#0;class#App#0" />
+            <element signature="method#appRunTime#0;class#App#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FileWatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="130" column="70" lean-forward="true" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
+        <state relative-caret-position="225">
+          <caret line="111" column="80" lean-forward="true" selection-start-line="111" selection-start-column="80" selection-end-line="111" selection-end-column="80" />
         </state>
       </provider>
     </entry>

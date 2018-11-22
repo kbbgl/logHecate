@@ -18,15 +18,6 @@ class FileWatcher {
     private WatchService watchService;
     private WatchKey key;
 
-//    FileWatcher(Path path, String pattern) throws IOException{
-//        this.path = path;
-//        this.pattern = pattern;
-//        this.watchService = FileSystems.getDefault().newWatchService();
-//        printListFilesInDir();
-//        register();
-//        processEvents();
-//    }
-
     FileWatcher(Path watchDir, String pattern, File outputLog) throws IOException {
         this.path = watchDir;
         this.pattern = pattern;
@@ -114,7 +105,7 @@ class FileWatcher {
         }
         else if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY){
             System.out.printf("File modified %s\n", filename);
-            if (extension.equals("txt")){
+            if (extension.equals("txt") || extension.equals("log")){
                 try {
                     readFileContent(absPath);
                 } catch (IOException e) {
@@ -128,20 +119,20 @@ class FileWatcher {
 
     private void readFileContent(Path path) throws IOException{
         File file = path.toFile();
-        final FileWriter fileWriter = new FileWriter(outputLog, true);
+        final FileWriter fileWriter = new FileWriter(this.outputLog, true);
         System.out.println("Reading file " + file);
 
         Files.lines(Paths.get(file.getAbsolutePath()))
                 .filter(line -> line.contains(this.pattern))
                 .forEach(line -> writeToFile(fileWriter, line));
 
-        fileWriter.close();
     }
 
     private void writeToFile(FileWriter fw, String line) {
         try {
             fw.write(String.format("%s%n", line));
             System.out.printf("Wrote line %s to file%n", line);
+//            fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

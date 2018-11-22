@@ -15,6 +15,7 @@ public class App {
     private final MainCLParameters mainArgs = new MainCLParameters();
     private final String appName = "logHecate";
     private final Date appRunDatetime = new Date();
+    private File outputFile;
 
     // TODO add console color printing support
     // https://github.com/fusesource/jansi
@@ -34,8 +35,8 @@ public class App {
         System.out.println(mainArgs);
 
         try {
-            outputFile();
-            new FileWatcher(mainArgs.watchDir, mainArgs.pattern, outputFile());
+            outputFile = outputFile();
+            new FileWatcher(mainArgs.watchDir, mainArgs.pattern, outputFile);
             } catch (IOException e) {
                 System.out.printf("ERROR: unable to launch FileWatcher - %s", e.getMessage());
         } catch (URISyntaxException e) {
