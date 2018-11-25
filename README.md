@@ -45,7 +45,6 @@ To fetch logs that might contain errors
  
 ##### Limitations:
  
- * If you choose to specify a file path using the `-of` flag, make sure that the file has already been created.
- This limitation will be addressed in next versions.
+ * If you choose to specify a file path using the `-of` flag, make sure that the folder path has already been created.
  
  * Currently supports reading `.txt` and `.log` files in directory.
